@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes delayed-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.delayed-spin {
+  animation: delayed-spin 0.6s linear 0.3s infinite;
+}
+
+/* Custom Toast Styles */
+.Toastify__toast {
+  padding: 8px 12px; /* Compact padding */
+  border-radius: 8px; /* Slightly rounded corners */
+  font-size: 0.875rem; /* Smaller font size */
+  line-height: 1.3; /* Tighter line height */
+  min-height: 40px; /* Reduced minimum height */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #ffffff; /* Light background */
+  color: #333333; /* Dark text for contrast */
+  border: 1px solid #e0e0e0; /* Light border for definition */
+}
+
+/* Toast Body */
+.Toastify__toast-body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 0; /* Remove default padding */
+}
+
+/* Close Button */
+.Toastify__close-button {
+  font-size: 0.75rem; /* Smaller close button */
+  color: #666666; /* Neutral color for the close button */
+  opacity: 0.7; /* Slightly transparent */
+  padding: 4px; /* Compact padding */
+  margin-left: 8px; /* Space between message and close button */
+}
+
+.Toastify__close-button:hover {
+  opacity: 1; /* Fully visible on hover */
+  color: #333333; /* Darker on hover */
+}
+
+/* Success Toast */
+.Toastify__toast--success {
+  background-color: #f0fdf4; /* Light green background */
+  border-color: #bbf7d0; /* Green border */
+  color: #15803d; /* Dark green text */
+}
+
+/* Error Toast */
+.Toastify__toast--error {
+  background-color: #fef2f2; /* Light red background */
+  border-color: #fecaca; /* Red border */
+  color: #dc2626; /* Dark red text */
+}
+
+/* Warning Toast */
+.Toastify__toast--warning {
+  background-color: #fffbeb; /* Light yellow background */
+  border-color: #fde68a; /* Yellow border */
+  color: #d97706; /* Dark yellow text */
+}
+
+/* Info Toast */
+.Toastify__toast--info {
+  background-color: #eff6ff; /* Light blue background */
+  border-color: #bfdbfe; /* Blue border */
+  color: #2563eb; /* Dark blue text */
+}
+
+/* Progress Bar */
+.Toastify__progress-bar {
+  height: 3px; /* Thinner progress bar */
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle progress bar color */
+}
+
+.Toastify__progress-bar--success {
+  background-color: #15803d; /* Green progress bar for success */
+}
+
+.Toastify__progress-bar--error {
+  background-color: #dc2626; /* Red progress bar for error */
+}
+
+.Toastify__progress-bar--warning {
+  background-color: #d97706; /* Yellow progress bar for warning */
+}
+
+.Toastify__progress-bar--info {
+  background-color: #2563eb; /* Blue progress bar for info */
+}
+
+.image-mask {
+  clip-path: inset(22% 0 22% 0);
+}

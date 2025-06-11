@@ -1,0 +1,45 @@
+{
+  "name": "test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "@nextui-org/react": "^2.6.11",
+    "@reduxjs/toolkit": "^2.5.0",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
+    "@tanstack/react-query": "^5.67.1",
+    "@tanstack/react-query-devtools": "^5.67.1",
+    "daisyui": "^4.12.23",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^11.15.0",
+    "javascript-time-ago": "^2.5.11",
+    "lucide-react": "^0.503.0",
+    "next": "15.1.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
+    "react-player": "^2.16.0",
+    "react-redux": "^9.2.0",
+    "react-spinners": "^0.15.0",
+    "react-toastify": "^11.0.3",
+    "redux-persist": "^6.0.0",
+    "socket.io-client": "^4.8.1",
+    "tailwindcss": "^3.4.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.3",
+    "postcss": "^8.5.3"
+  }
+}
