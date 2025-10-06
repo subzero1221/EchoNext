@@ -1,4 +1,4 @@
-export const URL = "http://localhost:8000/api/v1";
+export const URL = "https://echo-1-8dqu.onrender.com/api/v1";
 export const socketURL = "http://localhost:8000";
 
 export const errorStrCorrecter = (str) => {
