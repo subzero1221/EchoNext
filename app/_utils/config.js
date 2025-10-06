@@ -1,5 +1,5 @@
 export const URL = "https://echo-1-8dqu.onrender.com/api/v1";
-export const socketURL = "http://localhost:8000";
+export const socketURL = "https://echo-1-8dqu.onrender.com";
 
 export const errorStrCorrecter = (str) => {
   const prefix = "User validation failed: ";
