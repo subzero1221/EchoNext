@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import PostCard from "./PostCard";
 import { useAuth } from "../_contextComponents/AuthProvider";
@@ -9,14 +9,18 @@ import { getSavedPosts, getSharedPosts } from "../_utils/saveActions";
 import { getFriends } from "../_utils/friendActions";
 import RenderFriends from "./RenderFriends";
 import { IsPostsForFeedLoading } from "./IsPostsForFeedLoading";
+import { getPostsForMyWall } from "../_utils/postActions";
 
 export default function MyWall() {
-  const [activeTab, setActiveTab] = useState("share");
+  const [activeTab, setActiveTab] = useState("myposts");
+  const { user } = useAuth();
 
-  const { data: savedPosts, isLoading: isLoadingSaved } = useQuery({
-    queryKey: ["savedPosts"],
-    queryFn: () => getSavedPosts(),
-    enabled: activeTab === "save",
+ 
+
+  const { data: postsForMyWall, isLoading: isLoadingPostsForMyWall } = useQuery({
+    queryKey: ["postsForMyWall"],
+    queryFn: () => getPostsForMyWall(),
+    enabled: activeTab === "myposts",
   });
 
   const { data: sharedPosts, isLoading: isLoadingShared } = useQuery({
@@ -25,17 +29,29 @@ export default function MyWall() {
     enabled: activeTab === "share",
   });
 
+  const { data: savedPosts, isLoading: isLoadingSaved } = useQuery({
+    queryKey: ["savedPosts"],
+    queryFn: () => getSavedPosts(),
+    enabled: activeTab === "save",
+  });
+
   const { data: friends, isLoading: isLoadingFriends } = useQuery({
     queryKey: ["friends"],
     queryFn: () => getFriends(),
   });
 
-  const isLoading = activeTab === "share" ? isLoadingShared : isLoadingSaved;
-  const posts = activeTab === "share" ? sharedPosts : savedPosts;
+  // Determine current loading state and posts based on active tab
+  const isLoading = 
+    activeTab === "myposts" ? isLoadingPostsForMyWall :
+    activeTab === "share" ? isLoadingShared : 
+    isLoadingSaved;
 
-  const { user } = useAuth();
+  const posts = 
+    activeTab === "myposts" ? postsForMyWall :
+    activeTab === "share" ? sharedPosts : 
+    savedPosts;
 
-  console.log("sharedPosts:", sharedPosts);
+  console.log("Posts in my wall:", postsForMyWall);
 
   if (!user)
     return (
@@ -79,8 +95,18 @@ export default function MyWall() {
               <div className="border-b border-purple-500/10">
                 <nav className="flex -mb-px" aria-label="Tabs">
                   <button
+                    onClick={() => setActiveTab("myposts")}
+                    className={`w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm transition-all duration-300 ${
+                      activeTab === "myposts"
+                        ? "border-purple-500 text-purple-400"
+                        : "border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-600"
+                    }`}
+                  >
+                    My Posts
+                  </button>
+                  <button
                     onClick={() => setActiveTab("share")}
-                    className={`w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm transition-all duration-300 ${
+                    className={`w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm transition-all duration-300 ${
                       activeTab === "share"
                         ? "border-purple-500 text-purple-400"
                         : "border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-600"
@@ -90,7 +116,7 @@ export default function MyWall() {
                   </button>
                   <button
                     onClick={() => setActiveTab("save")}
-                    className={`w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm transition-all duration-300 ${
+                    className={`w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm transition-all duration-300 ${
                       activeTab === "save"
                         ? "border-purple-500 text-purple-400"
                         : "border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-600"
@@ -121,7 +147,7 @@ export default function MyWall() {
                   {posts.map((post) => (
                     <PostCard
                       key={post._id}
-                      post={post}
+                      post={activeTab === "myposts" ? post : post.post}
                       user={user}
                       className="transition-all duration-300 hover:shadow-xl"
                       myWallType={activeTab}
@@ -147,7 +173,9 @@ export default function MyWall() {
                     No posts found
                   </h3>
                   <p className="mt-1 text-sm text-slate-400">
-                    {activeTab === "share"
+                    {activeTab === "myposts"
+                      ? "Create your first post to see it here."
+                      : activeTab === "share"
                       ? "Start sharing posts to see them here."
                       : "Save posts to see them here."}
                   </p>

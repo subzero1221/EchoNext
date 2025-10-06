@@ -131,8 +131,6 @@ export async function getFriends() {
     }
 
     const data = await res.json();
-
-    console.log("Friends from friend actions:", data);
     return data.myFriends;
   } catch (err) {
     console.log(err);

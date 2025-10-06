@@ -46,7 +46,8 @@ export default function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+   
+    console.log(formData);
     const res = await signup(formData);
     if (res.success) {
       login(res.user);
@@ -102,7 +103,7 @@ export default function SignUpForm() {
           </motion.p>
         </div>
 
-        <motion.form
+        <form
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -228,7 +229,7 @@ export default function SignUpForm() {
               Sign in
             </a>
           </p>
-        </motion.form>
+        </form>
       </motion.div>
     </div>
   );

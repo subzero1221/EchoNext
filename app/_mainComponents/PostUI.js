@@ -36,8 +36,10 @@ export default function PostUI({ post }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const upVoted = upVotes.includes(user?._id);
-  const downVoted = downVotes.includes(user?._id);
+ 
+
+  const upVoted = upVotes?.includes(user?._id);
+  const downVoted = downVotes?.includes(user?._id);
 
   const handleUpVote = async () => {
     if (!user) {
@@ -96,6 +98,7 @@ export default function PostUI({ post }) {
   const hanldeShare = async () => {
     try {
       const res = await sharePost(post._id);
+      console.log("res:", res);
       if (res.success) toast.success("Post was shared on your wall");
       if (!res.success) toast.info(res.message);
     } catch (err) {
@@ -125,7 +128,7 @@ export default function PostUI({ post }) {
               upVoted ? "text-purple-400" : "text-slate-400"
             }`}
           >
-            {upVotes.length}
+            {upVotes?.length}
           </span>
         </button>
 
@@ -147,7 +150,7 @@ export default function PostUI({ post }) {
               downVoted ? "text-red-400" : "text-slate-400"
             }`}
           >
-            {downVotes.length}
+            {downVotes?.length}
           </span>
         </button>
       </div>

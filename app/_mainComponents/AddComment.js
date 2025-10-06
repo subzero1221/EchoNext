@@ -5,7 +5,7 @@ import { useAuth } from "../_contextComponents/AuthProvider";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-export default function AddComment({ postId, isLoading }) {
+export default function AddComment({ postId, isLoading}) {
   const [commentText, setCommentText] = useState("");
   const queryClient = useQueryClient();
   const { user } = useAuth();
@@ -24,9 +24,9 @@ export default function AddComment({ postId, isLoading }) {
       console.log(res);
     } catch (err) {
     } finally {
-      queryClient.invalidateQueries({ queryKey: ["comments"] });
+      queryClient.invalidateQueries({ queryKey: ["comments", postId] });
       setCommentText("");
-    }
+      }
   };
 
   return (

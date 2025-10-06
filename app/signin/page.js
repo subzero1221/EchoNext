@@ -14,6 +14,7 @@ import { useAuth } from "../_contextComponents/AuthProvider";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import useSocket from "../_customhooks/useSocket";
+import { createKey } from "next/dist/shared/lib/router/router";
 
 export default function SignIn() {
   const { login } = useAuth();
@@ -44,6 +45,7 @@ export default function SignIn() {
   };
 
   const handleSubmit = async (e) => {
+    console.log("Sign in button clicked");
     e.preventDefault();
     const res = await signin(formData);
     if (res.success) {

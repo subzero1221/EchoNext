@@ -59,6 +59,33 @@ export async function getPosts(authToken) {
   }
 }
 
+export async function getPostsForMyWall() {
+  try {
+   
+    const res = await fetch(`${URL}/posts/getMyPosts`, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Failed to fetch posts");
+    }
+
+    const data = await res.json();
+    console.log("Posts for my wall:", data.PostsWithImages);
+    const posts = data.postsWithImages;
+    return posts;
+  } catch (err) {
+    console.log(err);
+    return {
+      success: false,
+      message: err.message || "An error occurred",
+    };
+  }
+}
+
+
 export async function getCommunityPosts(communityId) {
   try {
     const res = await fetch(`${URL}/posts/getCommunityPosts/${communityId}`, {
@@ -114,6 +141,7 @@ export async function getComments(postId) {
   try {
     const res = await fetch(`${URL}/comments/getComments/${postId}`, {
       method: "GET",
+      cache: "no-store",   
     });
 
     if (!res.ok) {
@@ -274,10 +302,8 @@ export async function addReply(commentId, content) {
       throw new Error(errorData.message || "Failed to fetch posts");
     }
 
-    const data = await res.json();
-    console.log("newComment:", data);
-    const reply = data.newReply;
-    return reply;
+   
+    return true;
   } catch (err) {
     return {
       success: false,

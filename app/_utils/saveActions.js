@@ -29,6 +29,7 @@ export async function savePost(postId) {
 }
 
 export async function getSavedPosts() {
+  console.log("Getting saved posts");
   try {
     const res = await fetch(`${URL}/saves/getSavedPosts`, {
       method: "GET",

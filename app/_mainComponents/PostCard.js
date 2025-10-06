@@ -39,6 +39,8 @@ export default function PostCard({
     }
   };
 
+  console.log("post:", post);
+
   return (
     <article
       className="bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl hover:shadow-2xl 
