@@ -1,5 +1,5 @@
-export const URL = "https://echo-txcv.onrender.com/api/v1";
-export const socketURL = "https://echo-txcv.onrender.com";
+export const URL = "https://echo-production-d05f.up.railway.app/api/v1";
+export const socketURL = "https://echo-production-d05f.up.railway.app";
 
 export const errorStrCorrecter = (str) => {
   const prefix = "User validation failed: ";
